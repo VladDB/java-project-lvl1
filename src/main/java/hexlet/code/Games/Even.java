@@ -20,6 +20,12 @@ public class Even {
                 System.out.println("Correct!");
                 howMuchCorrect++;
             }  else {
+                if (randNumber % 2 != 0) {
+                    System.out.println("'" + answer + "'" + " is wrong answer ;(. Correct answer was 'no'.");
+                }
+                if (randNumber % 2 == 0) {
+                    System.out.println("'" + answer + "'" + " is wrong answer ;(. Correct answer was 'yes'.");
+                }
                 Cli.sayBye();
                 break;
             }
