@@ -17,6 +17,7 @@ public class GCD {
             int firstNum = (int) (Math.random() * borderForRandom);
             int secondNum = (int) (Math.random() * borderForRandom);
             System.out.println("Question: " + firstNum + " " + secondNum);
+            System.out.print("Your answer: ");
             while (secondNum != 0) {
                 minDel = secondNum;
                 secondNum = firstNum % secondNum;
