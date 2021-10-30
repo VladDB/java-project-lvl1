@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class MathProgress {
     public static void mathPrGame() {
         Scanner scAnswer = new Scanner(System.in);
-        String wrongAnswer = " is wrong answer ;(. Correct answer was '";
+        String wrongAnswer = "' is wrong answer ;(. Correct answer was '";
         int howMuchCorrect = 0;
         final int maxAnswers = 3;
         final int borderForRandomValue = 100;
@@ -35,7 +35,7 @@ public class MathProgress {
                 System.out.println("Correct!");
                 howMuchCorrect++;
             } else {
-                System.out.println("'" + answer + "'" + wrongAnswer + valueArr[randomPlace] + "'.");
+                System.out.println("'" + answer + wrongAnswer + valueArr[randomPlace] + "'.");
                 break;
             }
         }

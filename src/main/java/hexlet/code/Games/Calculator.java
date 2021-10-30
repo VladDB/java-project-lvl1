@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Calculator {
     public static void gameCalc() {
         Scanner scAnswer = new Scanner(System.in);
-        String wrongAnswer = " is wrong answer ;(. Correct answer was '";
+        String wrongAnswer = "' is wrong answer ;(. Correct answer was '";
         int howMuchCorrect = 0;
         final int maxAnswers = 3;
         final int borderForRandom = 100;
@@ -29,7 +29,7 @@ public class Calculator {
                         System.out.println("Correct!");
                         howMuchCorrect++;
                     } else {
-                        System.out.println("'" + answer + "'" + wrongAnswer + correctAnswerIncr + "'.");
+                        System.out.println("'" + answer + wrongAnswer + correctAnswerIncr + "'.");
                         Cli.sayBye();
                         howMuchCorrect = endCircle;
                     }
