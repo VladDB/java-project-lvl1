@@ -30,8 +30,9 @@ public class MathProgress {
                 System.out.print(" " + valueArr[j] + " ");
             }
             System.out.print("\n" + "Your answer: ");
-            int answer = scAnswer.nextInt();
-            if (answer == valueArr[randomPlace]) {
+            String answer = scAnswer.nextLine();
+            String strAnswer = String.valueOf(valueArr[randomPlace]);
+            if (strAnswer.equals(answer)) {
                 System.out.println("Correct!");
                 howMuchCorrect++;
             } else {
