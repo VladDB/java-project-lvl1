@@ -21,13 +21,13 @@ public class MathProgress {
             for (int i = 0; i < valueArr.length - 1; i++) {
                 valueArr[i + 1] = valueArr[i] + valuePlus;
             }
-            System.out.print("Question: ");
+            System.out.print("Question:");
             for (int j = 0; j < valueArr.length; j++) {
                 if (j == randomPlace) {
                     System.out.print(" .. ");
                     j++;
                 }
-                System.out.print(" " + valueArr[j] + " ");
+                System.out.print(" " + valueArr[j]);
             }
             System.out.print("\n" + "Your answer: ");
             String answer = scAnswer.nextLine();
