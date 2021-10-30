@@ -24,7 +24,7 @@ public class MathProgress {
             System.out.print("Question:");
             for (int j = 0; j < valueArr.length; j++) {
                 if (j == randomPlace) {
-                    System.out.print(" .. ");
+                    System.out.print(" ..");
                     j++;
                 }
                 System.out.print(" " + valueArr[j]);
