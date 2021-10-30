@@ -37,6 +37,7 @@ public class MathProgress {
                 howMuchCorrect++;
             } else {
                 System.out.println("'" + answer + wrongAnswer + valueArr[randomPlace] + "'.");
+                Cli.sayBye();
                 break;
             }
         }
