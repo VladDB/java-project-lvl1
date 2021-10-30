@@ -10,12 +10,12 @@ public class GCD {
         String wrongAnswer = "' is wrong answer ;(. Correct answer was '";
         int howMuchCorrect = 0;
         final int maxAnswers = 3;
-        final int borderForRandom = 100;
+        final int borderForRandom = 99;
         System.out.println("Find the greatest common divisor of given numbers.");
         while (howMuchCorrect < maxAnswers) {
             int minDel = 0;
-            int firstNum = (int) (Math.random() * borderForRandom);
-            int secondNum = (int) (Math.random() * borderForRandom);
+            int firstNum = (int) (Math.random() * borderForRandom + 1);
+            int secondNum = (int) (Math.random() * borderForRandom + 1);
             System.out.println("Question: " + firstNum + " " + secondNum);
             System.out.print("Your answer: ");
             while (secondNum != 0) {
