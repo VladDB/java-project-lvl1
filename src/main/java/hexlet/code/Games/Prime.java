@@ -1,40 +1,28 @@
 package hexlet.code.Games;
 
-import hexlet.code.Cli;
-
-import java.util.Scanner;
+import hexlet.code.Engine;
 
 public class Prime {
     public static void primeGame() {
-        Scanner scAnswer = new Scanner(System.in);
-        String wrongAnswer = "' is wrong answer ;(. Correct answer was '";
-        int howMuchCorrect = 0;
-        final int maxAnswers = 3;
-        final int borderForRandomValue = 998;
-        System.out.println("Answer 'yes' if given number is prime. Otherwise answer 'no'.");
-        while (howMuchCorrect < maxAnswers) {
-            int questionNum = (int) (Math.random() * borderForRandomValue + 2);
-            System.out.println("Question: " + questionNum);
-            System.out.print("Your answer: ");
-            String answer = scAnswer.nextLine();
-            String correctAnswer = "yes";
-            for (int i = 2; i < questionNum; i++) {
-                if (questionNum % i == 0) {
-                    correctAnswer = "no";
-                    break;
-                }
-            }
-            if (correctAnswer.equals(answer)) {
-                System.out.println("Correct!");
-                howMuchCorrect++;
-            } else {
-                System.out.println("'" + answer + wrongAnswer + correctAnswer + "'.");
-                Cli.sayBye();
-                break;
+        String gameTask = "Answer 'yes' if given number is prime. Otherwise answer 'no'.";
+        String[] questions = new String[Engine.maxQuestions];
+        String[] rightAnswers = new String[Engine.maxQuestions];
+        for (int i = 0; i < Engine.maxQuestions; i++) {
+            questions[i] = oneQuestion();
+            rightAnswers[i] = checkQuestion(questions[i]);
+        }
+        Engine.playGame(gameTask, questions, rightAnswers);
+    }
+    public static String oneQuestion() {
+        return String.valueOf(Engine.getRandomNum());
+    }
+    public static String checkQuestion(String question) {
+        int num = Integer.parseInt(question);
+        for (int i = 2; i < num; i++) {
+            if (num % i == 0) {
+                return  "no";
             }
         }
-        if (howMuchCorrect == maxAnswers) {
-            Cli.winGame();
-        }
+        return "yes";
     }
 }

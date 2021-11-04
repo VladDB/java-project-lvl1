@@ -1,68 +1,45 @@
 package hexlet.code.Games;
 
-import hexlet.code.Cli;
-
-import java.util.Random;
-import java.util.Scanner;
+import hexlet.code.Engine;
 
 public class Calculator {
+    static final int MAX_VALUE_OPERATOR = 3;
     public static void gameCalc() {
-        Scanner scAnswer = new Scanner(System.in);
-        String wrongAnswer = "' is wrong answer ;(. Correct answer was '";
-        int howMuchCorrect = 0;
-        final int maxAnswers = 3;
-        final int borderForRandom = 100;
-        final int endCircle = 4;
-        char[] operation = {'+', '-', '*'};
-        System.out.println("What is the result of the expression?");
-        while (howMuchCorrect < maxAnswers) {
-            int firstValue = (int) (Math.random() * borderForRandom);
-            int secondValue = (int) (Math.random() * borderForRandom);
-            char randomOperation = operation[new Random().nextInt(operation.length)];
-            System.out.println("Question: " + firstValue + " " + randomOperation + " " + secondValue);
-            System.out.print("Your answer: ");
-            int answer = scAnswer.nextInt();
-            switch (randomOperation) {
-                case '*':
-                    int correctAnswerIncr = firstValue * secondValue;
-                    if (answer == correctAnswerIncr) {
-                        System.out.println("Correct!");
-                        howMuchCorrect++;
-                    } else {
-                        System.out.println("'" + answer + wrongAnswer + correctAnswerIncr + "'.");
-                        Cli.sayBye();
-                        howMuchCorrect = endCircle;
-                    }
-                    break;
-                case '+':
-                    int correctAnswerSum = firstValue + secondValue;
-                    if (answer == correctAnswerSum) {
-                        System.out.println("Correct!");
-                        howMuchCorrect++;
-                    } else {
-                        System.out.println("'" + answer + "'" + wrongAnswer + correctAnswerSum + "'.");
-                        Cli.sayBye();
-                        howMuchCorrect = endCircle;
-                    }
-                    break;
-                case '-':
-                    int correctAnswerMinus = firstValue - secondValue;
-                    if (answer == correctAnswerMinus) {
-                        System.out.println("Correct!");
-                        howMuchCorrect++;
-                    } else {
-                        System.out.println("'" + answer + "'" + wrongAnswer + correctAnswerMinus + "'.");
-                        Cli.sayBye();
-                        howMuchCorrect = endCircle;
-                    }
-                    break;
-                default:
-                    howMuchCorrect = endCircle;
-                    break;
-            }
+        String gameTask = "What is the result of the expression?";
+        String[] questions = new String[Engine.maxQuestions];
+        String[] rightAnswers = new String[Engine.maxQuestions];
+        for (int i = 0; i < Engine.maxQuestions; i++) {
+            questions[i] = oneQuestion();
+            rightAnswers[i] = checkQuestion(questions[i]);
         }
-        if (howMuchCorrect == maxAnswers) {
-            Cli.winGame();
+        Engine.playGame(gameTask, questions, rightAnswers);
+    }
+    public static String getRandomOperator() {
+        int randomOperator = (int) (Math.random() * MAX_VALUE_OPERATOR);
+        switch (randomOperator) {
+            case 0:
+                return "+";
+            case 1:
+                return "-";
+            default:
+                return "*";
+        }
+    }
+    public static String oneQuestion() {
+        return Engine.getRandomNum() + " " + getRandomOperator() + " " + Engine.getRandomNum();
+    }
+    public static String checkQuestion(String question) {
+        String[] checkExpression = question.split(" ");
+        int num1 = Integer.parseInt(checkExpression[0]);
+        int num2 = Integer.parseInt(checkExpression[2]);
+        String operator = checkExpression[1];
+        switch (operator) {
+            case "+":
+                return Integer.toString(num1 + num2);
+            case "-":
+                return Integer.toString(num1 - num2);
+            default:
+                return Integer.toString(num1 * num2);
         }
     }
 }

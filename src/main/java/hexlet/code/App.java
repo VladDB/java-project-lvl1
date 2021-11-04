@@ -34,23 +34,18 @@ public class App {
                 Cli.sayHello();
                 break;
             case even:
-                Cli.sayHello();
                 Even.gameEven();
                 break;
             case calc:
-                Cli.sayHello();
                 Calculator.gameCalc();
                 break;
             case gcd:
-                Cli.sayHello();
                 GCD.gcdGame();
                 break;
             case progression:
-                Cli.sayHello();
                 MathProgress.mathPrGame();
                 break;
             case prime:
-                Cli.sayHello();
                 Prime.primeGame();
                 break;
             default:

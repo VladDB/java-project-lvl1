@@ -1,48 +1,55 @@
 package hexlet.code.Games;
 
-import hexlet.code.Cli;
-
-import java.util.Scanner;
+import hexlet.code.Engine;
 
 public class MathProgress {
+    static final int lengthOfOneQuestion = 10;
     public static void mathPrGame() {
-        Scanner scAnswer = new Scanner(System.in);
-        String wrongAnswer = "' is wrong answer ;(. Correct answer was '";
-        int howMuchCorrect = 0;
-        final int maxAnswers = 3;
-        final int borderForRandomValue = 100;
-        final int borderForRandomPlace = 9;
-        final int arrLength = 10;
-        while (howMuchCorrect < maxAnswers) {
-            int[] valueArr = new int[arrLength];
-            valueArr[0] = (int) (Math.random() * borderForRandomValue);
-            int valuePlus = (int) (Math.random() * borderForRandomPlace);
-            int randomPlace = (int) (Math.random() * borderForRandomPlace);
-            for (int i = 0; i < valueArr.length - 1; i++) {
-                valueArr[i + 1] = valueArr[i] + valuePlus;
-            }
-            System.out.print("Question:");
-            for (int j = 0; j < valueArr.length; j++) {
-                if (j == randomPlace) {
-                    System.out.print(" ..");
-                    j++;
-                }
-                System.out.print(" " + valueArr[j]);
-            }
-            System.out.print("\n" + "Your answer: ");
-            String answer = scAnswer.nextLine();
-            String strAnswer = String.valueOf(valueArr[randomPlace]);
-            if (strAnswer.equals(answer)) {
-                System.out.println("Correct!");
-                howMuchCorrect++;
+        String gameTask = "What number is missing in the progression?";
+        String[] questions = new String[Engine.maxQuestions];
+        String[] rightAnswers = new String[Engine.maxQuestions];
+        for (int i = 0; i < Engine.maxQuestions; i++) {
+            questions[i] = oneQuestion();
+            rightAnswers[i] = checkQuestion(questions[i]);
+        }
+        Engine.playGame(gameTask, questions, rightAnswers);
+    }
+    public static String oneQuestion() {
+        String question = "";
+        int[] questionArr = createQuestionArray(lengthOfOneQuestion);
+        int missingPoint = placeForMiss(questionArr);
+        for (int i = 0; i < questionArr.length; i++) {
+            if (i == missingPoint) {
+                question += ".. ";
             } else {
-                System.out.println("'" + answer + wrongAnswer + valueArr[randomPlace] + "'.");
-                Cli.sayBye();
-                break;
+                question += questionArr[i] + " ";
             }
         }
-        if (howMuchCorrect == maxAnswers) {
-            Cli.winGame();
+        return question;
+    }
+    public static String checkQuestion(String question) {
+        int answer = 0;
+        String[] findMiss = question.split(" ");
+        for (int i = 0; i < findMiss.length; i++) {
+            if (("..".equals(findMiss[i])) && i != 0) {
+                answer = (Integer.parseInt(findMiss[i - 1]) + Integer.parseInt(findMiss[i + 1])) / 2;
+            }
+            if ("..".equals(findMiss[i])) {
+                answer = 2 * Integer.parseInt(findMiss[i + 1]) - Integer.parseInt(findMiss[i + 2]);
+            }
         }
+        return Integer.toString(answer);
+    }
+    public static int[] createQuestionArray(int arrayLength) {
+        int[] valueArr = new int[arrayLength];
+        valueArr[0] = Engine.getRandomNum();
+        int difference = Engine.getRandomNum();
+        for (int i = 1; i < valueArr.length; i++) {
+            valueArr[i] = valueArr[i - 1] + difference;
+        }
+        return valueArr;
+    }
+    public static int placeForMiss(int[] array) {
+        return (int) (Math.random() * (array.length - 1));
     }
 }

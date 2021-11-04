@@ -1,40 +1,31 @@
 package hexlet.code.Games;
 
-import hexlet.code.Cli;
-
-import java.util.Scanner;
+import hexlet.code.Engine;
 
 public class GCD {
     public static void gcdGame() {
-        Scanner scAnswer = new Scanner(System.in);
-        String wrongAnswer = "' is wrong answer ;(. Correct answer was '";
-        int howMuchCorrect = 0;
-        final int maxAnswers = 3;
-        final int borderForRandom = 99;
-        System.out.println("Find the greatest common divisor of given numbers.");
-        while (howMuchCorrect < maxAnswers) {
-            int minDel = 0;
-            int firstNum = (int) (Math.random() * borderForRandom + 1);
-            int secondNum = (int) (Math.random() * borderForRandom + 1);
-            System.out.println("Question: " + firstNum + " " + secondNum);
-            System.out.print("Your answer: ");
-            while (secondNum != 0) {
-                minDel = secondNum;
-                secondNum = firstNum % secondNum;
-                firstNum = minDel;
-            }
-            int answer = scAnswer.nextInt();
-            if (answer == minDel) {
-                System.out.println("Correct!");
-                howMuchCorrect++;
-            } else {
-                System.out.println("'" + answer + wrongAnswer + minDel + "'.");
-                Cli.sayBye();
-                break;
-            }
+        String gameTask = "Find the greatest common divisor of given numbers.";
+        String[] questions = new String[Engine.maxQuestions];
+        String[] rightAnswers = new String[Engine.maxQuestions];
+        for (int i = 0; i < Engine.maxQuestions; i++) {
+            questions[i] = oneQuestion();
+            rightAnswers[i] = checkQuestion(questions[i]);
         }
-        if (howMuchCorrect == maxAnswers) {
-            Cli.winGame();
+        Engine.playGame(gameTask, questions, rightAnswers);
+    }
+    public static String oneQuestion() {
+        return Engine.getRandomNum() + " " + Engine.getRandomNum();
+    }
+    public static String checkQuestion(String question) {
+        int minDel = 0;
+        String[] partsOfQuestion = question.split(" ");
+        int num1 = Integer.parseInt(partsOfQuestion[0]);
+        int num2 = Integer.parseInt(partsOfQuestion[1]);
+        while (num2 != 0) {
+            minDel = num2;
+            num2 = num1 % num2;
+            num1 = minDel;
         }
+        return String.valueOf(minDel);
     }
 }
