@@ -3,8 +3,9 @@ package hexlet.code;
 import java.util.Scanner;
 
 public class Engine {
-    public static final int maxQuestions = 3;
-    static final int borderForRandomValue = 99;
+    public static final int MAX_QUESTIONS = 3;
+    static final int BORDER_FOR_RANDOM = 99;
+    static final String MISTAKE = "' is wrong answer ;(. Correct answer was '";
     public static void playGame(String gameTask, String[] question, String[] correctAnswers) {
         System.out.println("Welcome to the Brain Games!");
         System.out.println("May I have your name?");
@@ -12,23 +13,23 @@ public class Engine {
         String name = sc.nextLine();
         System.out.println("Hello, " + name + "!");
         System.out.println(gameTask);
-        for (int i = 0; i < maxQuestions; i++) {
+        for (int i = 0; i < MAX_QUESTIONS; i++) {
             System.out.println("Question: " + question[i]);
             System.out.print("Your answer: ");
             String answer = sc.nextLine();
             if (answer.equals(correctAnswers[i])) {
                 System.out.println("Correct!");
-                if (i == maxQuestions - 1) {
+                if (i == MAX_QUESTIONS - 1) {
                     System.out.println("Congratulations, " + name + "!");
                 }
             } else {
-                System.out.println("'" + answer + "' is wrong answer ;(. Correct answer was '" + correctAnswers[i] + "'.");
+                System.out.println("'" + answer + MISTAKE + correctAnswers[i] + "'.");
                 System.out.println("Let's try again, " + name + "!");
                 break;
             }
         }
-   }
+    }
     public static int getRandomNum() {
-        return (int) (1 + Math.random() * borderForRandomValue);
+        return (int) (1 + Math.random() * BORDER_FOR_RANDOM);
     }
 }
