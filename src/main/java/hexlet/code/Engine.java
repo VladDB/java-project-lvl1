@@ -4,8 +4,7 @@ import java.util.Scanner;
 
 public class Engine {
     public static final int MAX_QUESTIONS = 3;
-    static final int BORDER_FOR_RANDOM = 99;
-    static final String MISTAKE = "' is wrong answer ;(. Correct answer was '";
+    private static final String MISTAKE = "'%s' is wrong answer ;(. Correct answer was '%s'. \n Let's try again, %s!";
     public static void playGame(String gameTask, String[] question, String[] correctAnswers) {
         System.out.println("Welcome to the Brain Games!");
         System.out.println("May I have your name?");
@@ -17,19 +16,13 @@ public class Engine {
             System.out.println("Question: " + question[i]);
             System.out.print("Your answer: ");
             String answer = sc.nextLine();
-            if (answer.equals(correctAnswers[i])) {
-                System.out.println("Correct!");
-                if (i == MAX_QUESTIONS - 1) {
-                    System.out.println("Congratulations, " + name + "!");
-                }
+            if (!answer.equals(correctAnswers[i])) {
+                System.out.printf(MISTAKE, answer, correctAnswers[i], name);
+                return;
             } else {
-                System.out.println("'" + answer + MISTAKE + correctAnswers[i] + "'.");
-                System.out.println("Let's try again, " + name + "!");
-                break;
+                System.out.println("Correct!");
             }
         }
-    }
-    public static int getRandomNum() {
-        return (int) (1 + Math.random() * BORDER_FOR_RANDOM);
+        System.out.println("Congratulations, " + name + "!");
     }
 }

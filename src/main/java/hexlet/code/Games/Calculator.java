@@ -1,6 +1,7 @@
 package hexlet.code.Games;
 
 import hexlet.code.Engine;
+import hexlet.code.Utils;
 
 public class Calculator {
     static final int MAX_VALUE_OPERATOR = 3;
@@ -26,7 +27,7 @@ public class Calculator {
         }
     }
     public static String oneQuestion() {
-        return Engine.getRandomNum() + " " + getRandomOperator() + " " + Engine.getRandomNum();
+        return Utils.getRandomNum() + " " + getRandomOperator() + " " + Utils.getRandomNum();
     }
     public static String checkQuestion(String question) {
         String[] checkExpression = question.split(" ");

@@ -1,6 +1,7 @@
 package hexlet.code.Games;
 
 import hexlet.code.Engine;
+import hexlet.code.Utils;
 
 public class GCD {
     public static void gcdGame() {
@@ -14,7 +15,7 @@ public class GCD {
         Engine.playGame(gameTask, questions, rightAnswers);
     }
     public static String oneQuestion() {
-        return Engine.getRandomNum() + " " + Engine.getRandomNum();
+        return Utils.getRandomNum() + " " + Utils.getRandomNum();
     }
     public static String checkQuestion(String question) {
         int minDel = 0;

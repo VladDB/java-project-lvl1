@@ -1,6 +1,7 @@
 package hexlet.code.Games;
 
 import hexlet.code.Engine;
+import hexlet.code.Utils;
 
 public class MathProgress {
     static final int LENGTH_OF_QUESTION = 10;
@@ -45,8 +46,8 @@ public class MathProgress {
     }
     public static int[] createQuestionArray(int arrayLength) {
         int[] valueArr = new int[arrayLength];
-        valueArr[0] = Engine.getRandomNum();
-        int difference = Engine.getRandomNum();
+        valueArr[0] = Utils.getRandomNum();
+        int difference = Utils.getRandomNum();
         for (int i = 1; i < valueArr.length; i++) {
             valueArr[i] = valueArr[i - 1] + difference;
         }

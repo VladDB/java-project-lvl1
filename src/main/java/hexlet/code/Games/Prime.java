@@ -1,6 +1,7 @@
 package hexlet.code.Games;
 
 import hexlet.code.Engine;
+import hexlet.code.Utils;
 
 public class Prime {
     public static void primeGame() {
@@ -14,7 +15,7 @@ public class Prime {
         Engine.playGame(gameTask, questions, rightAnswers);
     }
     public static String oneQuestion() {
-        return String.valueOf(Engine.getRandomNum());
+        return String.valueOf(Utils.getRandomNum());
     }
     public static String checkQuestion(String question) {
         int num = Integer.parseInt(question);
